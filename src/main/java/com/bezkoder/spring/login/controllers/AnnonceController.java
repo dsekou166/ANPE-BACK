@@ -4,6 +4,7 @@ import com.bezkoder.spring.login.Message.ReponseMessage;
 import com.bezkoder.spring.login.img.SaveImage;
 import com.bezkoder.spring.login.models.*;
 import com.bezkoder.spring.login.repository.*;
+import com.bezkoder.spring.login.security.ServiceImpl.AnnonceServiceImp;
 import com.bezkoder.spring.login.security.services.AnnonceService;
 import com.bezkoder.spring.login.security.services.NotificationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,6 +37,8 @@ public class AnnonceController {
     @Autowired
     private DemandeurRepository demandeurRepository;
     @Autowired
+    private AnnonceServiceImp annonceServiceImp;
+    @Autowired
     private RecruteurRepository recruteurRepository;
 
 
@@ -46,12 +49,12 @@ public class AnnonceController {
         return "Utilisateur supprimer avec success";
     }
 
-    @PutMapping("/modifier/{id}")
+   /* @PutMapping("/modifier/{id}")
     //@PreAuthorize("hasRole('ADMIN') or hasRole('RECRUTEUR')")
     public Annonce update(@RequestBody Annonce annonce, @PathVariable Long idannonce) {
 
         return annonceService.modifier(annonce, idannonce);
-    }
+    }*/
 
     @GetMapping("/list")
     // @PreAuthorize("hasRole('ADMIN') or hasRole('RECRUTEUR')")
@@ -80,7 +83,7 @@ public class AnnonceController {
             //   Annonce annonce2 =annonceService.creer(annonce1,nomposte);
 
             // appel de la méthode générant les notifications
-            annonceService.modifier(annonce1,idannonce);
+            annonceServiceImp.modifier(annonce1,idannonce);
 
             return annonce1;
         } else {
@@ -107,7 +110,7 @@ public class AnnonceController {
        Recruteur recruteur2 = recruteurRepository.findById(idrecruteur).get();
         recruteur1.setIdrecruteur(idrecruteur);
         if (file != null) {
-annonce1.setRecruteur(recruteur2);
+            annonce1.setRecruteur(recruteur2);
             annonce1.setPhoto(SaveImage.save("Annonce", file, nomposte));
             annonce1.setDossierannonce(SaveImage.save("DossierAnnonce", dossier, dossier.getOriginalFilename()));
 

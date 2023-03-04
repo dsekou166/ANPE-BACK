@@ -11,6 +11,8 @@ public class SaveImage {
 
     public static String localhost = "http://127.0.0.1/";
     public static String serveradmin = localhost + "ANPE/image/Admin/";
+
+    public static String serverdossier = localhost + "ANPE/dossier/";
     public static String serverdemandeur = localhost + "ANPE/image/Demandeur/";
     public static String serverdemandeurcv = localhost + "ANPE/image/Demandeurcv/";
     public static String serverdemandeurdossier = localhost + "ANPE/image/Demandeurdossier/";
@@ -26,6 +28,8 @@ public class SaveImage {
     public static String Demandeurcvlocation = "C:/wamp64/www/ANPE/image/Demandeurcv/";
     public static String Adminlocation = "C:/wamp64/www/ANPE/image/Admin/";
     public static String Recruteurlocation = "C:/wamp64/www/ANPE/image/Recruteur/";
+
+    public static String Dossierlocation = "C:/wamp64/www/ANPE/dossier/";
 
     public static String save(String typeImage, MultipartFile file, String nomFichier) {
         String src = "";
@@ -56,7 +60,16 @@ public class SaveImage {
             location = Demandeurcvlocation;
             server = serverdemandeurcv;
 
-        }else if(typeImage == "DemandeurDossier"){
+        }else if(typeImage == "Dossierannonce"){
+            location = Dossierlocation;
+            server = serverdossier;
+        }
+        else if(typeImage == "Dossierdemandeur"){
+            location = Dossierlocation;
+            server = serverdossier;
+        }
+
+        else if(typeImage == "DemandeurDossier"){
             location = Demandeurdossierlocation;
             server = serverdemandeurdossier;
 

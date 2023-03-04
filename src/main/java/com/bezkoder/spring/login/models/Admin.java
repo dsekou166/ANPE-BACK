@@ -34,6 +34,10 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private List<Avis> avis;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "admin")
+    private List<Dossier> dossier;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "admin_roles",
             joinColumns = @JoinColumn(name = "idAdmin"),

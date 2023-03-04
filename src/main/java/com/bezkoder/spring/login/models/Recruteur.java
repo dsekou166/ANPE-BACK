@@ -40,7 +40,7 @@ public class Recruteur {
     @OneToMany(mappedBy = "recruteur")
     private List<RetourCandidature> retourCandidature;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "recruteur")
     private List<Annonce> annonce;
 

@@ -41,7 +41,7 @@ public class Annonce {
     private List<Notification> notification;
 
     @ManyToOne
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name="idrecruteur")
     private Recruteur recruteur;
 

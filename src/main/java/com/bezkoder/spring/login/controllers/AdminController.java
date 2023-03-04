@@ -93,7 +93,7 @@ public class AdminController {
                 Set<String> strRoles = signupRequest1.getRole();
                 Set<Role> roles = new HashSet<>();
                 if (strRoles == null) {
-                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("Erreur: Impossible de trouver le rôle!!"));
                     roles.add(userRole);
                 } else {

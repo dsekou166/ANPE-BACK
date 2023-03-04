@@ -15,20 +15,20 @@ public class SiReqRecruteur {
 
 
     @Size(min = 3, max = 20)
-    private String nomEntreprise;
+    private String nomentreprise;
 
     @Size(max = 50)
 
     private String secteur;
     @Email
-    private String emailEntreprise;
+    private String emailentreprise;
 
-    private String adresseEntreprise;
+    private String adresseentreprise;
 
-    private String photoEntreprise;
+    private String photoentreprise;
     //@NotBlank
     @Size(min = 6, max = 40)
-    private String passwordEntreprise;
+    private String passwordentreprise;
     private Set<String> role;
 
 

@@ -83,11 +83,12 @@ public class RecruteurController {
     }
 
     @PostMapping("/signup/Recruteur")
-    public ResponseEntity<?> registerRecruteur(@RequestParam("recruteur") String siReqRecruteur, @RequestParam("image") MultipartFile image) {
+    public ResponseEntity<?> registerRecruteur(@RequestParam("recruteur") String siReqRecruteur,
+                                               @RequestParam("image") MultipartFile image) {
         try {
 
             SiReqRecruteur siReqRecruteur1 = new JsonMapper().readValue(siReqRecruteur, SiReqRecruteur.class);
-            if (recruteurRepository.existsByEmailentreprise(siReqRecruteur1.getEmailEntreprise())) {
+            if (recruteurRepository.existsByEmailentreprise(siReqRecruteur1.getEmailentreprise())) {
                 return ResponseEntity.badRequest().body(new MessageResponse("Erreur: cet email existe deja"));
             }else {
                 Recruteur recruteur = new Recruteur();
@@ -106,14 +107,14 @@ public class RecruteurController {
                                 roles.add(adminRole);
 
                                 break;
-                            /*case "mod":
+                            case "mod":
                                 Role modRole = roleRepository.findByName(ERole.ROLE_RECRUTEUR)
                                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                                 roles.add(modRole);
 
-                                break;*/
+                                break;
                             default:
-                                Role userRole = roleRepository.findByName(ERole.ROLE_RECRUTEUR)
+                                Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                                 roles.add(userRole);
                         }
@@ -121,12 +122,12 @@ public class RecruteurController {
 
                 }
                 recruteur.setRoles(roles);
-                recruteur.setNomentreprise(siReqRecruteur1.getNomEntreprise());
-                recruteur.setAdresseentreprise(siReqRecruteur1.getAdresseEntreprise());
-                recruteur.setEmailentreprise(siReqRecruteur1.getEmailEntreprise());
+                recruteur.setNomentreprise(siReqRecruteur1.getNomentreprise());
+                recruteur.setAdresseentreprise(siReqRecruteur1.getAdresseentreprise());
+                recruteur.setEmailentreprise(siReqRecruteur1.getEmailentreprise());
                 recruteur.setSecteur(siReqRecruteur1.getSecteur());
                 recruteur.setPhotoentreprise(SaveImage.save("Recruteur",image, image.getOriginalFilename()));
-                recruteur.setPasswordentreprise(encoder.encode(siReqRecruteur1.getPasswordEntreprise()));
+                recruteur.setPasswordentreprise(encoder.encode(siReqRecruteur1.getPasswordentreprise()));
                 recruteurRepository.save(recruteur);
 
                 return ResponseEntity.ok(new MessageResponse("Recruteur ajouter avec succes"));
@@ -172,7 +173,7 @@ public class RecruteurController {
         try {
 
             SiReqRecruteur siReqRecruteur1 = new JsonMapper().readValue(siReqRecruteur, SiReqRecruteur.class);
-            if (recruteurRepository.existsByEmailentreprise(siReqRecruteur1.getEmailEntreprise())) {
+            if (recruteurRepository.existsByEmailentreprise(siReqRecruteur1.getEmailentreprise())) {
                 return ResponseEntity.badRequest().body(new MessageResponse("Erreur: cet email existe deja"));
             }else {
                 Recruteur recruteur = new Recruteur();
@@ -206,12 +207,12 @@ public class RecruteurController {
 
                 }
                 recruteur.setRoles(roles);
-                recruteur.setNomentreprise(siReqRecruteur1.getNomEntreprise());
-                recruteur.setAdresseentreprise(siReqRecruteur1.getAdresseEntreprise());
-                recruteur.setEmailentreprise(siReqRecruteur1.getEmailEntreprise());
+                recruteur.setNomentreprise(siReqRecruteur1.getNomentreprise());
+                recruteur.setAdresseentreprise(siReqRecruteur1.getAdresseentreprise());
+                recruteur.setEmailentreprise(siReqRecruteur1.getEmailentreprise());
                 recruteur.setSecteur(siReqRecruteur1.getSecteur());
                 recruteur.setPhotoentreprise(SaveImage.save("Recruteur",image, image.getOriginalFilename()));
-                recruteur.setPasswordentreprise(encoder.encode(siReqRecruteur1.getPasswordEntreprise()));
+                recruteur.setPasswordentreprise(encoder.encode(siReqRecruteur1.getPasswordentreprise()));
                 recrteurServiceImp.modifier(recruteur,idrecruteur);
 
                 return ResponseEntity.ok(new MessageResponse("Recruteur modifier avec succes"));

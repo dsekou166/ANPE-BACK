@@ -40,9 +40,19 @@ public class AnnonceServiceImp implements AnnonceService {
                     a.setLieu(annonce.getLieu());
                     a.setDatedebut(annonce.getDatedebut());
                     a.setDatefin(annonce.getDatefin());
-                    a.setDossierannonce(annonce.getDossierannonce());
                     a.setDescriptionannonce(annonce.getDescriptionannonce());
-                    a.setPhoto(annonce.getPhoto());
+                    if (a.getDossierannonce() == annonce.getDossierannonce())
+                    {
+                        a.setDossierannonce(a.getDossierannonce());
+                    }else {
+                        a.setDossierannonce(annonce.getDossierannonce());
+                    }
+                    if (a.getPhoto() == annonce.getPhoto())
+                    {
+                        a.setPhoto(annonce.getPhoto());
+                    }else {
+                        a.setPhoto(annonce.getPhoto());
+                    }
                     return annonceRepository.save(a);
                 } ).orElseThrow(() -> new RuntimeException("Cette annonce n'existe pas !"));
     }
