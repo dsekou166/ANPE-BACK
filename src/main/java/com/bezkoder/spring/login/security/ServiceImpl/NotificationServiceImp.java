@@ -44,8 +44,8 @@ System.out.println("profil========="+annonce.getProfil());
         List<Demandeur> DemandeurList=demandeurRepository.findByProfildemandeur(annonce.getProfil());
 
         for (Demandeur demandeur1 : DemandeurList){
-            String message = "Une nouvelle annonce de type " + demandeur1.getProfildemandeur()+ " vient d'être poster, " +
-                    annonce.getNomposte() + " .Nous vous invitons à consulter les détails de cette annonce. ";
+            String message = "Une nouvelle annonce de profil " + demandeur1.getProfildemandeur()+ " vient d'être poster, " +
+                    " nous vous invitons à consulter les détails de cette annonce dans les postes recents. ";
             Notification notification = new Notification();
             notification.setMessage(message);
             notification.setAnnonce(annonce);

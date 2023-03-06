@@ -14,4 +14,8 @@ public interface PostulerRepository extends JpaRepository<Postuler, Long> {
 
     List <Postuler> findByAnnonce(Annonce annonce);
 
+    boolean existsByDemandeurAndAnnonce(Demandeur demandeur,Annonce annonce);
+
+
+
 }

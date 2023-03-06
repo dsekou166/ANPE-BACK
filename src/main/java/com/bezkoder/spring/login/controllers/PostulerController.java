@@ -31,17 +31,23 @@ public class PostulerController {
     private AnnonceRepository annonceRepository;
 
     @PostMapping("/{iddemandeur}/{idannonce}")
-    public ResponseEntity<Postuler> postuler(@PathVariable Long iddemandeur, @PathVariable Long idannonce) {
+    public ResponseEntity<Object> postuler(@PathVariable Long iddemandeur, @PathVariable Long idannonce) {
         Demandeur demandeur = demandeurRepository.findById(iddemandeur).orElseThrow(() -> new NotFoundException("Demandeur non trouve avec id " + iddemandeur));
         Annonce annonce = annonceRepository.findById(idannonce).orElseThrow(() -> new NotFoundException("Annonce non trouvé avec id " + idannonce));
 
-        Postuler postuler = new Postuler();
-        postuler.setDemandeur(demandeur);
-        postuler.setAnnonce(annonce);
+        if (postulerRepository.existsByDemandeurAndAnnonce(demandeur,annonce)) {
+            //throw new RuntimeException("Cet utilisteur a dejà postuler");
+            return ResponseEntity.ok().body("Cet utilisteur a dejà postuler");
+        } else {
+            Postuler postuler = new Postuler();
+            postuler.setDemandeur(demandeur);
+            postuler.setAnnonce(annonce);
 
-        Postuler result = postulerRepository.save(postuler);
+            Postuler result = postulerRepository.save(postuler);
 
-        return ResponseEntity.ok().body(result);
+            return ResponseEntity.ok().body(result);
+        }
+
     }
 
     @GetMapping("/{annonce}")
